@@ -25,7 +25,7 @@ This project has been designed to do assignment test cases using webdriver.io. I
 2. Run test case using run command - npm run wdio
 
 ## Features
-1. Test case for login and image file upload, verification and email check
+1. Test case for login with credential
 
 2. Test case for verification text
 

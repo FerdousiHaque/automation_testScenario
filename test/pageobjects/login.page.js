@@ -10,15 +10,15 @@ class LoginPage extends Page {
      * define selectors using getter methods
      */
     get inputUsername () {
-        return $('#username');
+        return $('[for="userName"] + [name="userName"]');
     }
 
     get inputPassword () {
-        return $('#password');
+        return $('[name="password"]');
     }
 
     get btnSubmit () {
-        return $('button[type="submit"]');
+        return $('div > .sign-in-box-btn');
     }
 
     /**
@@ -27,6 +27,7 @@ class LoginPage extends Page {
      */
     async login (username, password) {
         await this.inputUsername.setValue(username);
+        await this.btnSubmit.click();
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
     }
