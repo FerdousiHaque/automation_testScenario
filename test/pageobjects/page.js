@@ -10,4 +10,17 @@ module.exports = class Page {
     open (path) {
         return browser.url(`https://qatest.marcombox.com/${path}`)
     }
+
+    async waitForElementInvisible(element = '#_s_ServerBusy_Footer') {
+        await browser.waitUntil(async () => {
+            const loaderElement = await $(element);
+            const isLoaderVisible = await loaderElement.isDisplayed();
+            return !isLoaderVisible;
+          }, { timeout: 30000, timeoutMsg: `Element '${element}' is still visible after 30 seconds`});
+          
+    }
+
+    async waitForSometime(time) {
+        browser.setTimeout({'implicit': time});
+    }
 }

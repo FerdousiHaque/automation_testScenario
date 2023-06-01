@@ -1,5 +1,3 @@
-
-
 const Page = require('./page');
 
 /**
@@ -23,13 +21,14 @@ class LoginPage extends Page {
 
     /**
      * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
+     * e.g. to login using email and password
      */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
+    async login (email, password) {
+        await this.inputUsername.setValue(email);
         await this.btnSubmit.click();
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
+        await super.waitForElementInvisible();
     }
 
     /**
