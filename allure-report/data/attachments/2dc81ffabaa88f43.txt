@@ -1,0 +1,6 @@
+{
+  "script": "arguments[0].click();",
+  "args": [
+    {}
+  ]
+}

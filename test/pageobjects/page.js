@@ -8,6 +8,7 @@ module.exports = class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
     open (path) {
+        browser.maximizeWindow()
         return browser.url(`https://qatest.marcombox.com/${path}`)
     }
 
@@ -22,5 +23,9 @@ module.exports = class Page {
 
     async waitForSometime(time) {
         browser.setTimeout({'implicit': time});
+    }
+
+    async jsClick(element) {
+        await browser.execute("arguments[0].click();", element);
     }
 }

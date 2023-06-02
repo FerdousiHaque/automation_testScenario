@@ -38,9 +38,10 @@ class ShareItem extends Page{
 
     /**
      * a method to encapsule automation code to interact with the page
-     * e.g. to edit title field value and verify
+     * e.g. to share the item using email
      */
     async shareUsingEmail (email) {
+        // select item and share checkbox
         await this.checkboxItem.waitForDisplayed();
         await this.checkboxItem.click();
         await super.waitForElementInvisible();
@@ -48,6 +49,7 @@ class ShareItem extends Page{
         await this.btnShare.click();
         await super.waitForElementInvisible();
 
+        // input and check email with link
         await this.inputEmail.waitForDisplayed();
         await this.inputEmail.click();
         await browser.keys(email);
@@ -62,7 +64,8 @@ class ShareItem extends Page{
     async openEmail (email) {
         browser.url(`https://maildrop.cc/inbox/?mailbox=${email.substring(0, email.indexOf("@"))}`)
         await super.waitForElementInvisible('div > span.hidden');
-        await super.waitForElementInvisible('div.bg-white.w-full');
+        await this.waitForEmail();
+        
         await this.frame.waitForDisplayed();
         await browser.switchToFrame(0);
         await this.linkDownload.scrollIntoView();
@@ -70,10 +73,30 @@ class ShareItem extends Page{
         const hrefValue = await this.linkDownload.getAttribute('href');
         await browser.switchToParentFrame();
         const linkPattern = /^https:\/\/qatest\.marcombox\.com\/FileShare\?id=.+$/;
-
         assert.ok(linkPattern.test(hrefValue), 'Link is not valid');
     }
 
+    
+    async waitForEmail () {
+        const MAX_CLICKS = 20;
+        let clickCount = 0;
+        const element = $('//span[text()="Refresh Mailbox"]');
+        if (await element.isExisting()) {
+            while (clickCount < MAX_CLICKS) {
+            await super.waitForSometime(2000);
+            if (!element.isExisting()) {
+                break;
+            }
+            
+            await element.click();
+            clickCount++;
+            await super.waitForElementInvisible('div > span.hidden');
+            // Wait for 3 seconds before the next click
+            await super.waitForSometime(3000);
+            }
+        }
+
+    }
 
 }
 

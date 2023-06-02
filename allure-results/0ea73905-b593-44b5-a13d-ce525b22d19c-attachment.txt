@@ -1,0 +1,4 @@
+{
+  "script": "return (() => [\r\n        window.scrollX, window.scrollY\r\n    ]).apply(null, arguments)",
+  "args": []
+}

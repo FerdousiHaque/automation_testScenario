@@ -57,7 +57,8 @@ class ItemPage extends Page{
         await this.dropdownType.click();
         await this.dropdownType.selectByVisibleText(type);
         await this.btnSave.scrollIntoView();
-        await this.btnSave.click();
+        await super.jsClick(await this.btnSave);
+        await super.waitForElementInvisible('.gp-bar.progress-striped.active');
         await super.waitForElementInvisible();
 
         // checking the image file name

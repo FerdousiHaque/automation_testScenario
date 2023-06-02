@@ -22,11 +22,13 @@ This project has been designed to do assignment test cases using webdriver.io. I
 ## Setup Configuration
 1. To open this project, you have to open the folder automation_testScenario in Visual Studio Code.
 
-2. Run test case using run command - npm run wdio
+2. Run test case using run command,
+
+        npm run wdio
 
 ## Features
 1. Test case for login with credential
 
-2. Test case for verification text
+2. Test case for verification item
 
 3. Test case for email link check
