@@ -4,7 +4,7 @@ This project has been designed to do assignment test cases using webdriver.io. I
 
 ## Tools and Technologies
 
-  - Visual Studio Code
+  - Visual Studio Code or any code editor
   - npm (v 9.5.1)
   - node (v 18.16.0)
   
@@ -26,9 +26,13 @@ This project has been designed to do assignment test cases using webdriver.io. I
 
         npm run wdio
 
+2. To generate allure report use following command,
+
+        allure generate allure-results --clean && allure open
+
 ## Features
 1. Test case for login with credential
 
 2. Test case for verification item
 
-3. Test case for email link check
+3. Test case for email link check using mailosaur
