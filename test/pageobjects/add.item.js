@@ -61,7 +61,7 @@ class ItemPage extends Page{
         await super.waitForElementInvisible('.gp-bar.progress-striped.active');
         await super.waitForElementInvisible();
 
-        // checking the image file name
+        // Checking the image file name
         await super.waitForSometime(2000);
         await super.waitForElementInvisible('.thumb-processing div');
         await super.waitForElementInvisible();
@@ -73,14 +73,12 @@ class ItemPage extends Page{
         // Wait for the thumbnail to be visible
         await this.thumbnail.waitForDisplayed();
     
-        // Perform verification
+        // Check if the thumbnail has a non-zero width
         const width = await this.thumbnail.getProperty('clientWidth');
-        const isThumbnailGenerated = width > 0; // Check if the thumbnail has a non-zero width
-
-        // Assertion
+        const isThumbnailGenerated = width > 0;
         assert.strictEqual(isThumbnailGenerated, true, 'Thumbnail has been generated.');
 
-        // verify Title and Type fields value
+        // Verify Title and Type fields value
         await expect(await this.textTitle.getText()).toEqual(title);
         await expect(await this.textType.getText()).toEqual(type);
     }

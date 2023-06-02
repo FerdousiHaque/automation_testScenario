@@ -31,13 +31,12 @@ class MainPage extends Page {
     }
     
     async getRandomEmail() {
-        // Generate a random number between 1 and 999999
+        // Generate a random number between 1 and 999999 and a letter
         const randomNumber = Math.floor(Math.random() * 999999) + 1;
         const randomLetter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
     
-        // Create the email address by appending the random number to a base email
-        const email = `automation${randomNumber}${randomLetter}@maildrop.cc`;
-        console.log("file width = " + email);
+        // Create the email address by appending the random number
+        const email = `automation${randomNumber}${randomLetter}@rrxshwzq.mailosaur.net`;
         return email;
     
     }

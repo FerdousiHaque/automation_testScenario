@@ -27,21 +27,12 @@ class ShareItem extends Page{
         return $('.btn-success._s_Send');
     }
 
-    get frame () {
-        return $('iFrame.w-full');
-    }
-
-    get linkDownload () {
-        return $('//span[contains(text(),"download")]/parent::a');
-    }
-
-
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to share the item using email
      */
     async shareUsingEmail (email) {
-        // select item and share checkbox
+        // Select item and share checkbox
         await this.checkboxItem.waitForDisplayed();
         await this.checkboxItem.click();
         await super.waitForElementInvisible();
@@ -49,7 +40,7 @@ class ShareItem extends Page{
         await this.btnShare.click();
         await super.waitForElementInvisible();
 
-        // input and check email with link
+        // Input and check email with link
         await this.inputEmail.waitForDisplayed();
         await this.inputEmail.click();
         await browser.keys(email);
@@ -58,44 +49,24 @@ class ShareItem extends Page{
         await super.waitForElementInvisible();
         await this.btnSend.click();
         await super.waitForElementInvisible();
-        await this.openEmail(email);
+        await this.getEmail(email);
     }
 
-    async openEmail (email) {
-        browser.url(`https://maildrop.cc/inbox/?mailbox=${email.substring(0, email.indexOf("@"))}`)
-        await super.waitForElementInvisible('div > span.hidden');
-        await this.waitForEmail();
-        
-        await this.frame.waitForDisplayed();
-        await browser.switchToFrame(0);
-        await this.linkDownload.scrollIntoView();
-        await this.linkDownload.waitForDisplayed();
-        const hrefValue = await this.linkDownload.getAttribute('href');
-        await browser.switchToParentFrame();
+    async getEmail (testEmailAddress) {
         const linkPattern = /^https:\/\/qatest\.marcombox\.com\/FileShare\?id=.+$/;
-        assert.ok(linkPattern.test(hrefValue), 'Link is not valid');
-    }
-
+        const MailosaurClient = require('mailosaur')
+        const mailosaur = new MailosaurClient('bRs6lzb5CBGbjtMyjE6yQOe6WhHwWFV3');
+        const serverId = 'rrxshwzq'
     
-    async waitForEmail () {
-        const MAX_CLICKS = 20;
-        let clickCount = 0;
-        const element = $('//span[text()="Refresh Mailbox"]');
-        if (await element.isExisting()) {
-            while (clickCount < MAX_CLICKS) {
-            await super.waitForSometime(2000);
-            if (!element.isExisting()) {
-                break;
-            }
-            
-            await element.click();
-            clickCount++;
-            await super.waitForElementInvisible('div > span.hidden');
-            // Wait for 3 seconds before the next click
-            await super.waitForSometime(3000);
-            }
+        const searchCriteria = {
+        sentTo: testEmailAddress
         }
-
+    
+        // depending on search criteria get the email
+        const message = await mailosaur.messages.get(serverId, searchCriteria)
+        const firstLink = message.html.links[0].href;
+        assert.ok(linkPattern.test(firstLink), 'Link is not valid');
+        
     }
 
 }

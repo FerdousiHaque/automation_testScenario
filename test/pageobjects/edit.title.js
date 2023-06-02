@@ -32,7 +32,7 @@ class EditItemPage extends Page{
      * e.g. to edit title field value and verify
      */
     async editTitle (title) {
-        // open item and click on edit icon
+        // Open item and click on edit icon
         await this.openItem.click();
         await super.waitForElementInvisible();
         await super.waitForElementInvisible('svg + p.chakra-text');
@@ -42,12 +42,12 @@ class EditItemPage extends Page{
         await this.iconEdit.click();
         await super.waitForElementInvisible();
 
-        // edit title by passing new title
+        // Edit title by passing new title
         const editTitleElement = await $('div:nth-child(2) > div > div > div > input');
         await editTitleElement.waitForDisplayed();
         await editTitleElement.setValue(title);
 
-        // finally save and close
+        // Finally save and close
         await this.btnSave.click();
         await super.waitForElementInvisible();
         await this.btnClose.click();
