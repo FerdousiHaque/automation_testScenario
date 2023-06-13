@@ -1,3 +1,0 @@
-{
-  "text": "D:\\automation_testScenario\\test\\images\\image.jpg"
-}

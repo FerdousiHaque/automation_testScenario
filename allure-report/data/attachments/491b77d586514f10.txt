@@ -1,4 +1,0 @@
-{
-  "using": "css selector",
-  "value": "._s_item-selector-item + div"
-}

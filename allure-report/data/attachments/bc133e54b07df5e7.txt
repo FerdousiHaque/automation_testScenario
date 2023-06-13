@@ -1,4 +1,0 @@
-{
-  "using": "css selector",
-  "value": ".k-row:nth-child(1) td:nth-child(2) #fieldValue"
-}

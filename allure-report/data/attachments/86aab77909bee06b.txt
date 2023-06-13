@@ -1,4 +1,0 @@
-{
-  "using": "css selector",
-  "value": "tbody .k-row:nth-child(1) .select-icon-check"
-}
