@@ -22,11 +22,16 @@ This project has been designed to do assignment test cases using webdriver.io. I
 ## Setup Configuration
 1. To open this project, you have to open the folder automation_testScenario in Visual Studio Code.
 
-2. Run test case using run command,
+
+2. Run following command to initialize,
+
+        npm i  --save-dev @wdio/cli
+
+3. Execute test case using run command,
 
         npm run wdio
 
-2. To generate allure report use following command,
+4. To generate allure report use following command,
 
         allure generate allure-results --clean && allure open
 

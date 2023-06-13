@@ -1,4 +1,0 @@
-{
-  "using": "css selector",
-  "value": ".dropdown ._s_Label"
-}
